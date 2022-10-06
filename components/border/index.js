@@ -4,6 +4,8 @@ import { Lanes } from "./lane";
 import { AiFillCar } from "react-icons/ai";
 import { FaWalking } from "react-icons/fa";
 export default function Component(data) {
+  console.log("THIS DATA", data);
+
   const {
     port_number,
     port_name,
@@ -29,9 +31,9 @@ export default function Component(data) {
   return (
     <Card key={port_number}>
       <Card.Header>
-        <Text small>
+        <Text small weight={"bold"}>
           {port_name}
-          <Text h3>
+          <Text h3 weight={"black"}>
             {crossing_name && crossing_name !== "" && `${crossing_name}`}
           </Text>
           <Badge
@@ -44,7 +46,7 @@ export default function Component(data) {
       </Card.Header>
       <Card.Body>
         <Grid.Container>
-          <Lanes lanes={lanes} />
+          <Lanes lanes={lanes} type="ready_lanes" />
         </Grid.Container>
       </Card.Body>
     </Card>

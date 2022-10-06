@@ -1,4 +1,11 @@
 import xml2js from "xml2js";
+import dayjs from "dayjs";
+
+const duration = require("dayjs/plugin/duration");
+dayjs.extend(duration);
+
+export const getDelay = (opts, format) => dayjs.duration({ ...opts });
+
 export const CBP_API = "https://bwt.cbp.gov/xml/bwt.xml";
 const host = process.env.NEXT_PUBLIC_SITE_URL;
 
