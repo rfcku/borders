@@ -1,7 +1,6 @@
 import { Container, Grid, Text } from "@nextui-org/react";
 import Border from "../components/border";
 import { cleanPorts, getBorders, matchQuery } from "../utils";
-
 export default function Home({ title, ports }) {
   return (
     <Container>
@@ -25,6 +24,7 @@ export async function getServerSideProps(context) {
   const {
     query: { id },
   } = context;
+
   const reports = await getBorders();
   const ports = matchQuery(id, reports);
   return {

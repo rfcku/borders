@@ -1,4 +1,4 @@
-import { Button, Container, Grid, Card, Text } from "@nextui-org/react";
+import { Grid, Card, Text } from "@nextui-org/react";
 export const Lane = (data) => {
   const { title, lane, icon } = data;
   return (
@@ -12,7 +12,7 @@ export const Lane = (data) => {
           </Grid>
           <Grid align="center">
             <Text h3>
-              {icon} {title}
+              {icon} <br /> {title}
             </Text>
           </Grid>
           <Grid align="center">

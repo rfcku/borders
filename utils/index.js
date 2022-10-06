@@ -1,10 +1,8 @@
 import xml2js from "xml2js";
 export const CBP_API = "https://bwt.cbp.gov/xml/bwt.xml";
+const host = process.env.NEXT_PUBLIC_SITE_URL;
 
-const groups = {
-  Canada: [],
-  Mexico: [],
-};
+export const api = (url) => fetch(`${host}/api/${url}`);
 
 const clean_obj = (port) => {
   const keys = Object.keys(port);
@@ -43,4 +41,17 @@ export const matchQuery = (query, reports) => {
   return reports.port.filter((o) => {
     return port_name_to_query(o.port_name) === query;
   });
+};
+
+export const arrangeBy = (arr, key) => {
+  const groups = {};
+  arr.forEach((obj) => {
+    const k = obj[key];
+
+    if (!groups[k]) {
+      groups[k] = [];
+    }
+    groups[k].push(obj);
+  });
+  return groups;
 };
