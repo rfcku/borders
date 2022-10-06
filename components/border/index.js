@@ -45,7 +45,7 @@ export default function Component(data) {
         </Text>
       </Card.Header>
       <Card.Body>
-        <Grid.Container>
+        <Grid.Container direction="row">
           <Lanes lanes={lanes} type="ready_lanes" />
         </Grid.Container>
       </Card.Body>

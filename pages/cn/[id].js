@@ -1,6 +1,6 @@
 import { Container, Grid, Text } from "@nextui-org/react";
-import Border from "../components/border";
-import { cleanPorts, getBorders, matchQuery } from "../utils";
+import Border from "../../components/border";
+import { cleanPorts, getBorders, matchQuery } from "../../utils";
 export default function Home({ title, ports }) {
   return (
     <Container>
