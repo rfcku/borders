@@ -1,5 +1,4 @@
 import { Grid, Card, Text, Divider } from "@nextui-org/react";
-import { getDelay } from "../../utils";
 export const Lane = (data) => {
   const { title, lane, icon, type } = data;
 
@@ -8,10 +7,6 @@ export const Lane = (data) => {
   } = lane;
 
   const minutes = parseInt(delay_minutes || 0);
-  console.log("Minutes", minutes);
-  // const d = getDelay({ minutes });
-  // const delay = minutes > 59 ? d.asHours() : minutes;
-  // console.log("delay", delay);
   return (
     <Card variant="flat">
       <Card.Body>

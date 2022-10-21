@@ -9,6 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/react": "^11.10.4",
+    "@emotion/styled": "^11.10.4",
+    "@mui/material": "^5.10.10",
     "@nextui-org/react": "^1.0.0-beta.10",
     "border-wait": "^0.11.0",
     "dayjs": "^1.11.5",
@@ -16,6 +19,7 @@
     "next-themes": "^0.2.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-geolocated": "^4.0.3",
     "react-icons": "^4.4.0",
     "xml2js": "^0.4.23",
     "xmldom": "^0.6.0"

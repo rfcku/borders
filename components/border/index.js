@@ -4,7 +4,6 @@ import { Lanes } from "./lane";
 import { AiFillCar } from "react-icons/ai";
 import { FaWalking } from "react-icons/fa";
 export default function Component(data) {
-  console.log("THIS DATA", data);
 
   const {
     port_number,
