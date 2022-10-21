@@ -6,6 +6,7 @@ import {
   Divider,
   Grid,
   Text,
+  Collapse,
 } from "@nextui-org/react";
 import Head from "next/head";
 import Autocomplete from "../components/autocomplete";
@@ -40,41 +41,19 @@ export default function Home({ time, groups }) {
       </Head>
       <Container>
         <Grid.Container gap={2}>
-          <Grid xs={12}direction="column" justify="center">
-            <Text h1>US / {country.toUpperCase()}</Text>
-          </Grid>
-          <Grid
-            xs={12}
-            alignContent="center"
-            justify="center"
-            alignItems="center"
-            align="center"
+          <Grid>
+          <Collapse
+            expanded={ portName !== "" ? false : true}
+            title={<Text h4 weight="bold">Us / {country}</Text>}
+            subtitle={
+              <div>
+                <Autocomplete 
+                  options={autocompleteKeys}
+                  onSelect={handleAutoComplete}
+                />
+              </div>
+            }
           >
-            <Button.Group ghost>
-              {countries.map((key) => (
-                <Button
-                  key={key}
-                  onClick={() => {
-                    setCountry(key);
-                    setPortName("");
-                  }}
-                >
-                  {key.toUpperCase()}
-                </Button>
-              ))}
-            </Button.Group>
-          </Grid>
-
-          <Grid.Container xs={12}>
-            <Grid>
-            <Autocomplete 
-              options={autocompleteKeys}
-              onSelect={handleAutoComplete}
-            />
-            </Grid>
-            <Divider style={{margin: 10}} />
-            <Grid>
-
             {Object.keys(gs).map((title) => (
               <Badge
                 key={title}
@@ -84,10 +63,7 @@ export default function Home({ time, groups }) {
                 {title}
               </Badge>
             ))}
-            </Grid>
-          </Grid.Container>
-          <Grid xs={12}>
-            <Divider />
+          </Collapse>
           </Grid>
           <Grid.Container gap={2}>
             {ports.map((port) => {
