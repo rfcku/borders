@@ -70,7 +70,7 @@ export default function Home({ time, groups }) {
               if (portName !== "" && port.port_name !== portName) return null;
 
               return (
-                <Grid xs={12} sm={6} md={3} key={port.port_number}>
+                <Grid xs={12} sm={6} md={3} key={port.port_number}>                  
                   <Border {...port} />
                 </Grid>
               );
