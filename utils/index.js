@@ -37,6 +37,12 @@ export const getBorders = async () => {
       const json = await xml2js.parseStringPromise(xml, { mergeAttrs: true });
       return json.border_wait_time;
     })
+    .then((data) => {
+      return {
+        ports: cleanPorts(data.port),
+        updated: dayjs().format("MMMM D, YYYY"),
+      };
+    })
     .catch(console.error);
 };
 
@@ -59,6 +65,21 @@ export const arrangeBy = (arr, key) => {
       groups[k] = [];
     }
     groups[k].push(obj);
+  });
+  return groups;
+};
+
+export const byCountry = (ports) => {
+  const groups = {
+    Canada: [],
+    Mexico: [],
+  };
+  ports.forEach((port) => {
+    if (port.border.includes("Canadian")) {
+      groups.Canada.push(port);
+    } else {
+      groups.Mexico.push(port);
+    }
   });
   return groups;
 };

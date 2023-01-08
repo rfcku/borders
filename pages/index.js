@@ -11,17 +11,11 @@ import {
 import Head from "next/head";
 import Autocomplete from "../components/autocomplete";
 import Border from "../components/border";
-import { cleanObj, getBorders, arrangeBy } from "../utils";
-
-const groups = {
-  Canada: [],
-  Mexico: [],
-};
-
+import { getBorders, arrangeBy, byCountry } from "../utils";
 export default function Home({ time, groups }) {
   const [country, setCountry] = useState("Mexico");
+  
   const ports = groups[country];
-  const countries = Object.keys(groups);
 
   const [portName, setPortName] = useState("");
 
@@ -84,24 +78,13 @@ export default function Home({ time, groups }) {
 
 export async function getServerSideProps(context) {
   const reports = await getBorders();
-  const { port: ports } = reports;
+  const { ports } = reports;
 
-  const gs = arrangeBy(ports, "port_name");
-
-  ports.forEach((port) => {
-    const obj = cleanObj(port);
-    if (port.border[0].includes("Canadian")) {
-      groups.Canada.push(obj);
-    } else {
-      groups.Mexico.push(obj);
-    }
-  });
+  const grouped = byCountry(ports);
+  
   return {
     props: {
-      ports: ports || [],
-      groups: groups || [],
-      gs: gs || {},
-      keys: Object.keys(gs) || [],
+      groups: grouped || [],
     },
   };
 }
