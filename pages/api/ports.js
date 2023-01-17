@@ -28,20 +28,27 @@ import { getBorders, byCountry,  cleanObj, arrangeBy } from '../../utils'
  *         description: Something went wrong
  */
 
+import authorize from "../../utils/authorize";
 export default async function handler(req, res) {
+  const validate = await authorize(req, res);
+
+  if (validate === false) {
+    return res.status(401).json({
+      error: "Unauthorized",
+    });
+  }
 
   const { country, portName } = req.query;
 
   const data = await getBorders();
 
   if (country) {
-
     const ports_byCountry = byCountry(data.ports);
     const countries = Object.keys(ports_byCountry);
-    
+
     if (!countries.includes(country)) {
       return res.status(404).json({
-        error: 'Country not found'
+        error: "Country not found",
       });
     }
 
@@ -52,26 +59,26 @@ export default async function handler(req, res) {
       if (!port.length) {
         //return error
         return res.status(404).json({
-            error: 'Port not found'
+          error: "Port not found",
         });
-      } 
+      }
       return res.status(200).json({
         query: req.query,
         ports: port,
-        total: port.length
+        total: port.length,
       });
     }
 
     return res.status(200).json({
-          query: req.query,
-          ports: ports_byCountry[country],
-          total: ports_byCountry[country].length
+      query: req.query,
+      ports: ports_byCountry[country],
+      total: ports_byCountry[country].length,
     });
   }
 
   return res.status(200).json({
     query: req.query,
     ports: data.ports,
-    total: data.ports.length
+    total: data.ports.length,
   });
 }

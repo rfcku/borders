@@ -23,8 +23,16 @@ import { getBorders } from '../../utils'
  */
 
 
-
+import authorize from "../../utils/authorize";
 export default async function handler(req, res) {
+
+    const validate = await authorize(req, res);
+
+    if (validate === false) {
+      return res.status(401).json({
+        error: "Unauthorized",
+      });
+    }
 
   const { 
     portName, 
