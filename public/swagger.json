@@ -1,0 +1,145 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Next Swagger API Example",
+    "version": "1.0"
+  },
+  "paths": {
+    "/api/port": {
+      "get": {
+        "description": "Returns port data for a given port name",
+        "parameters": [
+          {
+            "name": "portName",
+            "in": "query",
+            "description": "Port name",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns port data for a given port name"
+          },
+          "400": {
+            "description": "Please provide a port name"
+          },
+          "404": {
+            "description": "Port not found"
+          },
+          "500": {
+            "description": "Something went wrong"
+          }
+        }
+      }
+    },
+    "/api/ports": {
+      "get": {
+        "description": "Returns all data for all ports",
+        "parameters": [
+          {
+            "name": "country",
+            "in": "query",
+            "description": "Country",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "portName",
+            "in": "query",
+            "description": "Port name",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns all ports grouped by country"
+          },
+          "400": {
+            "description": "Invalid parameters"
+          },
+          "404": {
+            "description": "Port not found"
+          },
+          "500": {
+            "description": "Something went wrong"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Port": {
+        "type": "object",
+        "properties": {
+          "country": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          },
+          "lat": {
+            "type": "number"
+          },
+          "lng": {
+            "type": "number"
+          },
+          "zoom": {
+            "type": "number"
+          }
+        }
+      },
+      "Country": {
+        "type": "object",
+        "properties": {
+          "country": {
+            "type": "string"
+          },
+          "ports": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Port"
+            }
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Port"
+    },
+    {
+      "name": "Ports"
+    },
+    {
+      "name": "Country"
+    },
+    {
+      "name": "PortName"
+    },
+    {
+      "name": "PortCode"
+    },
+    {
+      "name": "PortLat"
+    },
+    {
+      "name": "PortLng"
+    },
+    {
+      "name": "PortZoom"
+    },
+    {
+      "name": "PortCountry"
+    },
+    {
+      "name": "PortName"
+    }
+  ]
+}

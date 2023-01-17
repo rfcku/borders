@@ -83,3 +83,60 @@ export const byCountry = (ports) => {
   });
   return groups;
 };
+
+const filterBy = (arr, key, value) => {
+  return arr.filter((o) => {
+    return o[key] === value;
+  });
+};
+
+// create a recursive function that searches for a key in an object
+// and returns the value
+const findKey = (obj, key) => {
+  let value;
+
+  Object.keys(obj).some((k) => {
+    if (k === key) {
+      value = obj[k];
+      return true;
+    }
+    if (obj[k] && typeof obj[k] === "object") {
+      value = findKey(obj[k], key);
+      return value !== undefined;
+    }
+  });
+
+  return value;
+};
+
+//
+const hasKey = (obj, key) => {
+  return Object.prototype.hasOwnProperty.call(obj, key);
+}
+
+export const searchObject = (obj, keys) => {
+  if (!obj || typeof obj !== 'object') {
+    return {};
+  }
+
+  let result = {};
+  let queue = [obj];
+
+  while (queue.length > 0) {
+    let current = queue.shift();
+    for (let key of keys) {
+      if (hasKey(current, key)) {
+        result[key] = current[key];
+      }
+    }
+    let keysArray = Object.keys(current);
+    for (let i = 0; i < keysArray.length; i++) {
+      let key = keysArray[i];
+      if (typeof current[key] === 'object') {
+        queue.push(current[key]);
+      }
+    }
+  }
+
+  return result;
+}
