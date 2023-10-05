@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import Head from 'next/head';
-import Autocomplete from '../components/autocomplete';
 import Border from '../components/border';
 
 import { Navbar } from '../components/Navbar';

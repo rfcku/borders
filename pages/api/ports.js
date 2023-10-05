@@ -32,20 +32,6 @@ import clientPromise from '../../lib/mongodb';
 
 import authorize from '../../utils/authorize';
 export default async function handler(req, res) {
-  const client = await clientPromise;
-
-  const db = await client.db('borders').collection('ports');
-
-  const collection = await db.find({}).toArray();
-
-  console.log('collection', collection);
-
-  // for each port in collection check if it exists in the database
-
-  // if it exists then update it
-
-  // if it doesn't exist then insert it
-
   const validate = await authorize(req, res);
 
   if (validate === false) {
