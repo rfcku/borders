@@ -12,6 +12,7 @@ export default async function handler(req, res) {
 
   // create date object from last_updated_date, last_updated_time
   const date = new Date(`${last_updated_date} ${last_updated_time}`);
+  console.log('date', date);
 
   const db = await client.db('borders');
   await data.ports.forEach(async (port) => {
