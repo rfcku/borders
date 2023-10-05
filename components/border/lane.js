@@ -1,7 +1,7 @@
 import { Grid, Card, Divider, CardBody, CardHeader } from '@nextui-org/react';
 export const Lane = (data) => {
   const { title, lane, icon, type } = data;
-
+  console.log('lane', lane);
   const {
     ready_lanes: { delay_minutes },
   } = lane;
@@ -16,13 +16,17 @@ export const Lane = (data) => {
           <span>mins</span>
         </p>
         <br /> {title} <br />
-        <span> Lanes: {lane.maximum_lanes}</span>
+        <small className='text-center font-light text-xs'>
+          {' '}
+          Lanes: {lane.maximum_lanes}
+        </small>
       </CardBody>
     </Card>
   );
 };
 
 export const Lanes = ({ lanes, type }) => {
+  return lanes.map((l) => <Lane key={l.title} {...l} type={type} />);
   return lanes.map(
     (l) =>
       l.lane.maximum_lanes !== 'N/A' && (
