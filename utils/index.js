@@ -1,12 +1,12 @@
-import xml2js from "xml2js";
-import dayjs from "dayjs";
+import xml2js from 'xml2js';
+import dayjs from 'dayjs';
 
-const duration = require("dayjs/plugin/duration");
+const duration = require('dayjs/plugin/duration');
 dayjs.extend(duration);
 
 export const getDelay = (opts, format) => dayjs.duration({ ...opts });
 
-export const CBP_API = "https://bwt.cbp.gov/xml/bwt.xml";
+export const CBP_API = 'https://bwt.cbp.gov/xml/bwt.xml';
 const host = process.env.NEXT_PUBLIC_SITE_URL;
 
 export const api = (url) => fetch(`${host}/api/${url}`);
@@ -16,7 +16,7 @@ const clean_obj = (port) => {
   const obj = {};
   keys.forEach((k) => {
     obj[k] =
-      typeof port[k][0] === "object" ? clean_obj(port[k][0]) : port[k][0];
+      typeof port[k][0] === 'object' ? clean_obj(port[k][0]) : port[k][0];
   });
   return obj;
 };
@@ -40,14 +40,16 @@ export const getBorders = async () => {
     .then((data) => {
       return {
         ports: cleanPorts(data.port),
-        updated: dayjs().format("MMMM D, YYYY"),
+        updated: dayjs().format('MMMM D, YYYY'),
+        last_updated_time: data.last_updated_time,
+        last_updated_date: data.last_updated_date,
       };
     })
     .catch(console.error);
 };
 
 const port_name_to_query = (port_name) =>
-  port_name[0].toLowerCase().replace(" ", "-");
+  port_name[0].toLowerCase().replace(' ', '-');
 export const toQuery = port_name_to_query;
 
 export const matchQuery = (query, reports) => {
@@ -75,7 +77,7 @@ export const byCountry = (ports) => {
     Mexico: [],
   };
   ports.forEach((port) => {
-    if (port.border.includes("Canadian")) {
+    if (port.border.includes('Canadian')) {
       groups.Canada.push(port);
     } else {
       groups.Mexico.push(port);
@@ -100,7 +102,7 @@ const findKey = (obj, key) => {
       value = obj[k];
       return true;
     }
-    if (obj[k] && typeof obj[k] === "object") {
+    if (obj[k] && typeof obj[k] === 'object') {
       value = findKey(obj[k], key);
       return value !== undefined;
     }
@@ -112,7 +114,7 @@ const findKey = (obj, key) => {
 //
 const hasKey = (obj, key) => {
   return Object.prototype.hasOwnProperty.call(obj, key);
-}
+};
 
 export const searchObject = (obj, keys) => {
   if (!obj || typeof obj !== 'object') {
@@ -139,4 +141,4 @@ export const searchObject = (obj, keys) => {
   }
 
   return result;
-}
+};

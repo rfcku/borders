@@ -50,23 +50,25 @@ export default function UseAutocomplete({options, onSelect}) {
   return (
     <div>
       <div {...getRootProps()}>
-        <Input 
-        {...getInputProps()} 
-        placeholder="Search ...." 
-        clearable
-        />
+        <Input {...getInputProps()} placeholder='Search ....' clearable />
       </div>
       {groupedOptions.length > 0 ? (
         <Listbox {...getListboxProps()}>
-            <Card>
-                <Grid.Container gap={1}>
-                    {groupedOptions.map((option, index) => (
-                    <Grid xs={12} key={options.label} className="autocomplete-option">
-                        <Text {...getOptionProps({ option, index })}>{option.label}</Text>
-                    </Grid>
-                ))}
+          <Card>
+            <Grid.Container gap={1}>
+              {groupedOptions.map((option, index) => (
+                <Grid
+                  xs={12}
+                  key={options.label}
+                  className='autocomplete-option'
+                >
+                  <Text {...getOptionProps({ option, index })}>
+                    {option.label}
+                  </Text>
+                </Grid>
+              ))}
             </Grid.Container>
-            </Card>
+          </Card>
         </Listbox>
       ) : null}
     </div>

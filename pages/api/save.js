@@ -31,15 +31,8 @@ import clientPromise from '../../lib/mongodb';
  */
 
 import authorize from '../../utils/authorize';
+
 export default async function handler(req, res) {
-  const client = await clientPromise;
-
-  const db = await client.db('borders').collection('ports');
-
-  const collection = await db.find({}).toArray();
-
-  console.log('collection', collection);
-
   // for each port in collection check if it exists in the database
 
   // if it exists then update it
@@ -54,43 +47,40 @@ export default async function handler(req, res) {
     });
   }
 
-  const { country, portName } = req.query;
-
   const data = await getBorders();
-  // console.log('data', data);
-  if (country) {
-    const ports_byCountry = byCountry(data.ports);
-    const countries = Object.keys(ports_byCountry);
 
-    if (!countries.includes(country)) {
-      return res.status(404).json({
-        error: 'Country not found',
-      });
+  const client = await clientPromise;
+
+  const db = await client.db('borders');
+  await data.ports.forEach(async (port) => {
+    const { port_number } = port;
+
+    const p = {
+      port_number,
+      border: port.border,
+      port_name: port.port_name,
+      crossing_name: port.crossing_name,
+      hours: port.hours,
+      created_at: new Date(),
+    };
+
+    let exists = await db.collection('ports').findOne({ port_number });
+    if (exists) {
+      await db.collection('ports').updateOne({ port_number }, { $set: p });
+    } else {
+      exists = await db.collection('ports').insertOne(p);
     }
 
-    if (portName) {
-      const port = ports_byCountry[country].filter((port) => {
-        return port.port_name.toLowerCase().includes(portName.toLowerCase());
-      });
-      if (!port.length) {
-        //return error
-        return res.status(404).json({
-          error: 'Port not found',
-        });
-      }
-      return res.status(200).json({
-        query: req.query,
-        ports: port,
-        total: port.length,
-      });
-    }
-
-    return res.status(200).json({
-      query: req.query,
-      ports: ports_byCountry[country],
-      total: ports_byCountry[country].length,
+    await db.collection('lanes').insertOne({
+      port_number: port_number,
+      passenger_vehicle_lanes: port.passenger_vehicle_lanes,
+      pedestrian_lanes: port.pedestrian_lanes,
+      commercial_vehicle_lanes: port.commercial_vehicle_lanes,
+      port_status: port.port_status,
+      timestamp: new Date(),
+      port_id: exists._id,
     });
-  }
+  });
 
   return res.status(200).json({
     query: req.query,

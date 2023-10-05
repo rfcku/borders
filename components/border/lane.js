@@ -1,4 +1,4 @@
-import { Grid, Card, Text, Divider } from "@nextui-org/react";
+import { Grid, Card, Divider, CardBody, CardHeader } from '@nextui-org/react';
 export const Lane = (data) => {
   const { title, lane, icon, type } = data;
 
@@ -8,32 +8,16 @@ export const Lane = (data) => {
 
   const minutes = parseInt(delay_minutes || 0);
   return (
-    <Card variant="flat">
-      <Card.Body>
-        <Grid.Container
-          justify="center"
-          alignContent="center"
-          alignItems="center"
-          align="center"
-          gap={2}
-        >
-          <Grid>
-            <Text h2 weight={"black"}>
-              {minutes} <Text>mins</Text>
-            </Text>
-          </Grid>
-          <Divider />
-          <Grid>
-            <Text h3 weight={"black"}>
-              {icon} <br /> {title} <br />
-            </Text>
-          </Grid>
-          <Divider />
-          <Grid>
-            <Text weight={"black"}> Lanes: {lane.maximum_lanes}</Text>
-          </Grid>
-        </Grid.Container>
-      </Card.Body>
+    <Card variant='flat'>
+      <CardBody className='flex flex-col justify-center content-center items-center'>
+        {icon}
+        <p className='font-bold text-xl'>
+          <span className='text-xl'>{minutes}</span>
+          <span>mins</span>
+        </p>
+        <br /> {title} <br />
+        <span> Lanes: {lane.maximum_lanes}</span>
+      </CardBody>
     </Card>
   );
 };
@@ -41,10 +25,8 @@ export const Lane = (data) => {
 export const Lanes = ({ lanes, type }) => {
   return lanes.map(
     (l) =>
-      l.lane.maximum_lanes !== "N/A" && (
-        <Grid key={l.title} xs={lanes.length <= 1 ? 12 : 6}>
-          <Lane {...l} type={type} />
-        </Grid>
+      l.lane.maximum_lanes !== 'N/A' && (
+        <Lane key={l.title} {...l} type={type} />
       )
   );
 };
