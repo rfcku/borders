@@ -9,13 +9,13 @@ export const Lane = (data) => {
   const minutes = parseInt(delay_minutes || 0);
   return (
     <Card variant='flat'>
-      <CardBody className='flex flex-col justify-center content-center items-center'>
+      <CardBody className='flex flex-col justify-center content-center items-center gap-2'>
+        <p className='font-light text-xs'>{title}</p>
         {icon}
         <p className='font-bold text-xl'>
           <span className='text-xl'>{minutes}</span>
           <span>mins</span>
         </p>
-        <br /> {title} <br />
         <small className='text-center font-light text-xs'>
           {' '}
           Lanes: {lane.maximum_lanes}

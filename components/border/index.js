@@ -51,7 +51,7 @@ export default function Component(data) {
   // if (!lanes) return null;
 
   return (
-    <Card key={port_number}>
+    <Card key={port_number} className='p-2'>
       <CardHeader>
         <div className='flex flex-col gap-1 w-full'>
           <div className='flex flex-row justify-between w-full'>

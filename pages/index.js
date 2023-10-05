@@ -3,10 +3,12 @@ import Head from 'next/head';
 import Border from '../components/border';
 
 import { Navbar } from '../components/Navbar';
+import { Code, ScrollShadow } from '@nextui-org/react';
+import { timeAgo } from '../utils';
 
-import { getBorders, arrangeBy, byCountry } from '../utils';
+import { getBorders } from '../utils';
 
-export default function Home({ date, time, ports }) {
+export default function Home({ date, time, timeAgo, ports }) {
   const [filtered, setFiltered] = useState(ports || []);
 
   const handleInput = (str) => {
@@ -63,16 +65,22 @@ export default function Home({ date, time, ports }) {
         <meta name='google' content='notranslate' key='notranslate' />
       </Head>
       <Navbar date={date} time={time} handleInput={handleInput} />
-      <div className='flex flex-col gap-1 p-20'>
-        <div className='text-right'>
-          <small className='text-sm font-light'>
+      <div className='flex flex-col gap-4 p-20 bg-gray'>
+        <div className='flex flex-col items-end'>
+          <Code className='text-sm font-light'>
             Updated: {date} {time}
-          </small>
+          </Code>
+          <br />
+          <Code className='text-sm font-light'>{timeAgo}</Code>
         </div>
-        <div className='grid grid-cols-4 gap-4'>
-          {filtered.map((port) => (
-            <Border key={port._name} {...port} />
-          ))}
+        <div>
+          <ScrollShadow className='flex'>
+            <div className='grid xs:grid-cols-1 sm:grid-col-2 md:grid-cols-2 lg:grid-cols-4 gap-4'>
+              {filtered.map((port) => (
+                <Border key={port._name} {...port} />
+              ))}
+            </div>
+          </ScrollShadow>
         </div>
       </div>
     </main>
@@ -86,19 +94,14 @@ export async function getServerSideProps(context) {
 
   const timestamp = new Date(`${last_updated_date} ${last_updated_time}`);
   timestamp.setHours(timestamp.getHours() - 3);
-
-  // console.log(
-  //   timestamp.toLocaleString('en-US', {
-  //     timeZone: 'America/Tijuana',
-  //   })
-  // );
-
+  console.log(timeAgo(timestamp));
   return {
     props: {
       // groups: grouped || [],
       ports: ports || [],
       date: timestamp.toDateString(),
       time: timestamp.toLocaleTimeString(),
+      timeAgo: timeAgo(timestamp),
     },
   };
 }
