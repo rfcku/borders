@@ -1,8 +1,9 @@
+import { Link } from 'next/link';
 
 export const Navbar = ({ handleInput, date, time }) => {
   return (
     <div className='flex flex-row gap-2 px-20 py-10 justify-between align-middle items-center'>
-      <a href="/" className='flex flex-row gap-3 align-middle items-center'>
+      <Link href="/" className='flex flex-row gap-3 align-middle items-center'>
 
 
 
@@ -17,7 +18,7 @@ export const Navbar = ({ handleInput, date, time }) => {
           <h1 className='font-extrabold text-2xl'>GoBorderGo</h1>
           <div className='text-xs dark:text-zinc-400 font-light'>{date}</div>
         </div>
-      </a>
+      </Link>
       <div className='flex flex-row gap-3'>
         <button className='text-zinc-500'>
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-6">

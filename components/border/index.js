@@ -1,4 +1,5 @@
 
+import Link from 'next/link';
 
 import { Lanes } from './lane';
 import { AiFillCar } from 'react-icons/ai';
@@ -46,9 +47,9 @@ export default function Component(data) {
             </h3>
           </div>
           <div className='flex justify-center items-center align-middle'>
-            <a href={`https://www.google.com.mx/maps/search/${port_name}+${crossing_name}+border`} target="_blank" aria-label='Like' className='bg-blue-600 flex justify-center items-center align-middle rounded-xl h-10 w-10'>
+            <Link rel="noreferrer" href={`https://www.google.com.mx/maps/search/${port_name}+${crossing_name}+border`} target="_blank" aria-label='Like' className='bg-blue-600 flex justify-center items-center align-middle rounded-xl h-10 w-10'>
               <FaDirections size='20' />
-            </a>
+            </Link>
           </div>
         </div>
         <div className='flex flex-row gap-2'>
