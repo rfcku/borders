@@ -1,21 +1,9 @@
-import {
-  Grid,
-  Badge,
-  Card,
-  CardHeader,
-  CardBody,
-  CardFooter,
-  Image,
-  Button,
-  Chip,
-  Divider,
-} from '@nextui-org/react';
+
 
 import { Lanes } from './lane';
 import { AiFillCar } from 'react-icons/ai';
 import { FaWalking } from 'react-icons/fa';
 
-import { FaMap } from 'react-icons/fa';
 import { FaDirections } from 'react-icons/fa';
 export default function Component(data) {
   const {
@@ -26,7 +14,10 @@ export default function Component(data) {
     port_status,
     passenger_vehicle_lanes,
     pedestrian_lanes,
+    commercial_vehicle_lanes,
   } = data;
+
+  console.log("THIS IS THE DATA", data);
 
   const lanes = [
     {
@@ -41,19 +32,19 @@ export default function Component(data) {
       icon: <FaWalking size='30' />,
       ...data,
     },
+    //{
+    //  title: 'commercial',
+    //  lane: pedestrian_lanes,
+    //  icon: <FaWalking size='30' />,
+    //  ...data,
+    //},
   ];
-  // console.log('crossing_name', crossing_name);
-  // console.log('port_name', port_name);
 
-  if (port_name === 'Alexandria Bay, NY') {
-    console.log('lanes', lanes);
-  }
-  // if (!lanes) return null;
 
   return (
-    <div key={port_number} className='flex flex-col gap-3 align-middle justify-between items-stretch p-5 rounded-xl bg-zinc-800'>
+    <div key={port_number} className='flex flex-col gap-3 align-middle justify-between items-stretch p-5 rounded-xl bg-zinc-800 min-w-96'>
       <div className='flex flex-col gap-2 w-full'>
-        <div className='flex flex-row justify-between'>
+        <div className='flex flex-row justify-between gap-4'>
           <div className='flex'>
             <h3 className='font-bold text-lg'>
               <span>{port_name && port_name !== '' && `${port_name}`}</span>
@@ -63,9 +54,9 @@ export default function Component(data) {
             </h3>
           </div>
           <div className='flex justify-center items-center align-middle'>
-            <button isIconOnly aria-label='Like' className='bg-blue-600 flex justify-center items-center align-middle rounded-xl h-10 w-10'>
+            <a href={`https://www.google.com.mx/maps/search/${port_name}+${crossing_name}+border`} target="_blank" aria-label='Like' className='bg-blue-600 flex justify-center items-center align-middle rounded-xl h-10 w-10'>
               <FaDirections size='20' />
-            </button>
+            </a>
           </div>
         </div>
         <div className='flex flex-row gap-2'>

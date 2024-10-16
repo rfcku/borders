@@ -1,9 +1,10 @@
 export const Lane = (data) => {
   const { title, lane, icon, type } = data;
-  console.log('lane', lane);
+
   const {
     ready_lanes: { delay_minutes },
   } = lane;
+
 
   const minutes = parseInt(delay_minutes || 0);
   return (
@@ -25,6 +26,15 @@ export const Lane = (data) => {
 };
 
 export const Lanes = ({ lanes, type }) => {
+
+  //return (
+  //  <div className='flex justify-between  gap-4'>
+  //    {lanes.map((l) => (
+  //      <Lane key={l.title} {...l} type={type} />
+  //    ))}
+  //  </div>
+  //);
+
   return lanes.map((l) => <Lane key={l.title} {...l} type={type} />);
   return lanes.map(
     (l) =>

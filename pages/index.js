@@ -1,11 +1,8 @@
 import { useState, useEffect } from 'react';
 import Head from 'next/head';
 import Border from '../components/border';
-
 import { Navbar } from '../components/Navbar';
-import { Code, ScrollShadow } from '@nextui-org/react';
 import { timeAgo } from '../utils';
-
 import { getBorders } from '../utils';
 
 export default function Home({ date, time, timeAgo, ports }) {
@@ -40,7 +37,7 @@ export default function Home({ date, time, timeAgo, ports }) {
     if (navigator.geolocation) {
       navigator.permissions
         .query({ name: 'geolocation' })
-        .then(function (result) {
+        .then(function(result) {
           console.log(result);
           if (result.state === 'granted') {
             //If granted then you can directly call your function here
@@ -67,20 +64,19 @@ export default function Home({ date, time, timeAgo, ports }) {
       <Navbar date={date} time={time} handleInput={handleInput} />
       <div className='flex flex-col gap-4 p-20 bg-gray'>
         <div className='flex flex-col items-end'>
-          <Code className='text-sm font-light'>
+          <code className='text-sm font-light'>
             Updated: {date} {time}
-          </Code>
-          <br />
-          <Code className='text-sm font-light'>{timeAgo}</Code>
+          </code>
+          <code className='text-sm font-light'>{timeAgo}</code>
         </div>
         <div>
-          <ScrollShadow className='flex'>
+          <div className='flex'>
             <div className='grid xs:grid-cols-1 sm:grid-col-2 md:grid-cols-2 lg:grid-cols-4 gap-4'>
               {filtered.map((port) => (
                 <Border key={port._name} {...port} />
               ))}
             </div>
-          </ScrollShadow>
+          </div>
         </div>
       </div>
     </main>
@@ -89,7 +85,6 @@ export default function Home({ date, time, timeAgo, ports }) {
 
 export async function getServerSideProps(context) {
   const data = await getBorders();
-  // console.log('data', data);
   const { ports, last_updated_date, last_updated_time, updated } = data;
 
   const timestamp = new Date(`${last_updated_date} ${last_updated_time}`);
