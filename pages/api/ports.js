@@ -43,7 +43,6 @@ export default async function handler(req, res) {
   const { country, portName } = req.query;
 
   const data = await getBorders();
-  // console.log('data', data);
   if (country) {
     const ports_byCountry = byCountry(data.ports);
     const countries = Object.keys(ports_byCountry);

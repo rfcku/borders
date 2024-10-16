@@ -100,10 +100,8 @@ export default function Home({ date, time, timeAgo, ports }) {
 export async function getServerSideProps(context) {
   const data = await getBorders();
   const { ports, last_updated_date, last_updated_time, updated } = data;
-
   const timestamp = new Date(`${last_updated_date} ${last_updated_time}`);
   timestamp.setHours(timestamp.getHours() - 3);
-  console.log(timeAgo(timestamp));
   return {
     props: {
       // groups: grouped || [],
