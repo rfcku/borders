@@ -26,20 +26,5 @@ export const Lane = (data) => {
 };
 
 export const Lanes = ({ lanes, type }) => {
-
-  //return (
-  //  <div className='flex justify-between  gap-4'>
-  //    {lanes.map((l) => (
-  //      <Lane key={l.title} {...l} type={type} />
-  //    ))}
-  //  </div>
-  //);
-
   return lanes.map((l) => <Lane key={l.title} {...l} type={type} />);
-  return lanes.map(
-    (l) =>
-      l.lane.maximum_lanes !== 'N/A' && (
-        <Lane key={l.title} {...l} type={type} />
-      )
-  );
 };

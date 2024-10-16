@@ -14,10 +14,10 @@ export default function Component(data) {
     port_status,
     passenger_vehicle_lanes,
     pedestrian_lanes,
-    commercial_vehicle_lanes,
   } = data;
 
-  console.log("THIS IS THE DATA", data);
+  console.log("THIS DATA", data);
+
 
   const lanes = [
     {
@@ -32,12 +32,6 @@ export default function Component(data) {
       icon: <FaWalking size='30' />,
       ...data,
     },
-    //{
-    //  title: 'commercial',
-    //  lane: pedestrian_lanes,
-    //  icon: <FaWalking size='30' />,
-    //  ...data,
-    //},
   ];
 
 
@@ -70,9 +64,23 @@ export default function Component(data) {
       </div>
       <div className='grid grid-cols-2 gap-4'>
         <Lanes lanes={lanes} type='ready_lanes' />
+
+
+
       </div>
-      <div className='text-xs text-zinc-600'>
-        {port_number}
+      {
+        //  <div className='flex flex-row gap-2 justify-center align-middle items-center'>
+        //
+        //    <span className='text-xs text-zinc-500 bg-zinc-200 w-1 h-1 rounded-xl'></span>
+        //    <span className='text-xs text-zinc-500 bg-zinc-200 w-1 h-1 rounded-xl'></span>
+        //    <span className='text-xs text-zinc-500 bg-zinc-500 w-1 h-1 rounded-xl'></span>
+        //  </div>
+        //
+        //}
+      }
+      <div className='flex flex-row justify-start gap-1'>
+        <div className='bg-zinc-700 rounded-xl px-2 py-1 text-xs text-zinc-500'>{data.border.replace("Border", "")}</div>
+        <div className='bg-zinc-700 rounded-xl px-2 py-1 text-xs text-zinc-500'>{port_number}</div>
       </div>
     </div >
   );
