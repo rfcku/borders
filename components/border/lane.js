@@ -1,4 +1,3 @@
-import { Grid, Card, Divider, CardBody, CardHeader } from '@nextui-org/react';
 export const Lane = (data) => {
   const { title, lane, icon, type } = data;
   console.log('lane', lane);
@@ -8,20 +7,20 @@ export const Lane = (data) => {
 
   const minutes = parseInt(delay_minutes || 0);
   return (
-    <Card variant='flat'>
-      <CardBody className='flex flex-col justify-center content-center items-center gap-2'>
-        <p className='font-light text-xs'>{title}</p>
+    <div className='bg-zinc-900 rounded-xl p-4'>
+      <div className='flex flex-col justify-center content-center items-center gap-2'>
+        <p className='font-light text-xs text-zinc-500'>{title}</p>
         {icon}
         <p className='font-bold text-xl'>
           <span className='text-xl'>{minutes}</span>
           <span>mins</span>
         </p>
-        <small className='text-center font-light text-xs'>
+        <small className='text-center font-light text-xs text-zinc-500'>
           {' '}
           Lanes: {lane.maximum_lanes}
         </small>
-      </CardBody>
-    </Card>
+      </div>
+    </div>
   );
 };
 

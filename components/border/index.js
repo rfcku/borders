@@ -51,39 +51,38 @@ export default function Component(data) {
   // if (!lanes) return null;
 
   return (
-    <Card key={port_number} className='p-2'>
-      <CardHeader>
-        <div className='flex flex-col gap-1 w-full'>
-          <div className='flex flex-row justify-between w-full'>
-            <div className='flex w-4/5'>
-              <h3 className='font-bold text-lg'>
-                <span>{port_name && port_name !== '' && `${port_name}`}</span>
-                <span>
-                  {crossing_name && crossing_name !== '' && `${crossing_name}`}
-                </span>
-              </h3>
-            </div>
-            <div className='flex w-1/5 justify-end'>
-              <Button isIconOnly aria-label='Like'>
-                <FaDirections size='20' />
-              </Button>
-            </div>
+    <div key={port_number} className='flex flex-col gap-3 align-middle justify-between items-stretch p-5 rounded-xl bg-zinc-800'>
+      <div className='flex flex-col gap-2 w-full'>
+        <div className='flex flex-row justify-between'>
+          <div className='flex'>
+            <h3 className='font-bold text-lg'>
+              <span>{port_name && port_name !== '' && `${port_name}`}</span>
+              <span className='ml-2 text-zinc-300'>
+                {crossing_name && crossing_name !== '' && `${crossing_name}`}
+              </span>
+            </h3>
           </div>
-          <div className='flex flex-row gap-2'>
-            <Chip
-              color={port_status.toLowerCase() === 'open' ? 'primary' : 'error'}
-            >
-              {port_status}
-            </Chip>
-            <Chip>{hours}</Chip>
+          <div className='flex justify-center items-center align-middle'>
+            <button isIconOnly aria-label='Like' className='bg-blue-600 flex justify-center items-center align-middle rounded-xl h-10 w-10'>
+              <FaDirections size='20' />
+            </button>
           </div>
         </div>
-      </CardHeader>
-      <CardBody>
-        <div className='grid grid-cols-2 gap-4'>
-          <Lanes lanes={lanes} type='ready_lanes' />
+        <div className='flex flex-row gap-2'>
+          <div
+            className={`flex ${port_status.toLowerCase() === 'open' ? 'bg-green-500' : 'bg-red-500'} items-center justify-center px-2 py-1 rounded-full text-xs font-bold uppercase`}
+          >
+            {port_status}
+          </div>
+          <div className='flex items-center align-middle justify-center px-2 py-1 uppercase text-xs bg-yellow-500 rounded-xl'>{hours}</div>
         </div>
-      </CardBody>
-    </Card>
+      </div>
+      <div className='grid grid-cols-2 gap-4'>
+        <Lanes lanes={lanes} type='ready_lanes' />
+      </div>
+      <div className='text-xs text-zinc-600'>
+        {port_number}
+      </div>
+    </div >
   );
 }
