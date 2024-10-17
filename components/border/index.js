@@ -35,7 +35,7 @@ export default function Component(data) {
 
 
   return (
-    <div key={port_number} className='flex flex-col gap-3 align-middle justify-between items-stretch p-5 rounded-xl bg-zinc-800 min-w-96'>
+    <div key={port_number} className='flex flex-col gap-3 align-middle justify-between items-stretch p-5 rounded-xl bg-zinc-800'>
       <div className='flex flex-col gap-2 w-full'>
         <div className='flex flex-row justify-between gap-4'>
           <div className='flex'>

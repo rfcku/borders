@@ -8,21 +8,40 @@ import { getBorders } from '../utils';
 export default function Home({ date, time, timeAgo, ports }) {
   const [filtered, setFiltered] = useState(ports || []);
 
-  const handleInput = (str) => {
-    setFiltered(
-      ports.filter((port) => {
+  const [tags, setTags] = useState([]);
 
+  const handleInput = (e) => {
+
+    setTags(e)
+    let found = [];
+    if (e.length === 0) {
+      setFiltered(ports);
+      return;
+    }
+    e.forEach((tag) => {
+      found = ports.filter((port) => {
         const name = port.port_name.toLowerCase();
         const crossing = port.crossing_name.toLowerCase();
         const number = port.port_number.toLowerCase();
         const border = port.border.toLowerCase();
-
-        const search = str.toLowerCase();
-
-        return name.includes(search) || crossing.includes(search) || number.includes(search) || border.includes(search);
-
-      })
-    );
+        return name.includes(tag) || crossing.includes(tag) || number.includes(tag) || border.includes(tag);
+      });
+    });
+    setFiltered(found);
+    //setFiltered(
+    //  ports.filter((port) => {
+    //
+    //    const name = port.port_name.toLowerCase();
+    //    const crossing = port.crossing_name.toLowerCase();
+    //    const number = port.port_number.toLowerCase();
+    //    const border = port.border.toLowerCase();
+    //
+    //    const search = str.toLowerCase();
+    //
+    //    return name.includes(search) || crossing.includes(search) || number.includes(search) || border.includes(search);
+    //
+    //  })
+    //);
   };
 
   var options = {
@@ -70,7 +89,7 @@ export default function Home({ date, time, timeAgo, ports }) {
         <meta name='google' content='nositelinkssearchbox' key='sitelinks' />
         <meta name='google' content='notranslate' key='notranslate' />
       </Head>
-      <Navbar date={date} time={time} handleInput={handleInput} />
+      <Navbar date={date} time={time} tags={tags} handleInput={handleInput} />
       <div className='flex flex-col gap-4 p-20 bg-gray'>
         <div className='flex flex-col items-end'>
           <code className='text-sm font-light'>
@@ -80,7 +99,7 @@ export default function Home({ date, time, timeAgo, ports }) {
         </div>
         <div>
           <div className='flex'>
-            <div className='grid xs:grid-cols-1 sm:grid-col-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-1'>
+            <div className='grid xs:grid-cols-1 sm:grid-col-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2'>
               {filtered.map((port) => (
                 <Border key={port.port__name + port.port_number} {...port} />
               ))}

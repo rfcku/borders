@@ -1,6 +1,8 @@
 import Link from 'next/link';
 
-export const Navbar = ({ handleInput, date, time }) => {
+import TagsInput from 'react-tagsinput'
+
+export const Navbar = ({ handleInput, date, time, tags }) => {
   return (
     <div className='flex flex-row gap-2 px-20 py-10 justify-between align-middle items-center'>
       <Link href="/" className='flex flex-row gap-3 align-middle items-center'>
@@ -27,10 +29,13 @@ export const Navbar = ({ handleInput, date, time }) => {
           </svg>
 
         </button>
-        <input
-          className='border-none rounded-lg px-3 py-2 w-80'
-          placeholder='Type to search...'
-          onChange={(e) => handleInput(e.target.value)}
+        <TagsInput
+          value={tags}
+          onChange={handleInput}
+          className='flex flex-row gap-2 bg-zinc-900 px-2 py-1 rounded-md items-center align-middle'
+          inputProps={{
+            placeholder: 'Search',
+          }}
         />
       </div>
     </div>

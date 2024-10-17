@@ -53,6 +53,9 @@ importers:
       react-icons:
         specifier: ^4.12.0
         version: 4.12.0(react@18.2.0)
+      react-tagsinput:
+        specifier: ^3.20.3
+        version: 3.20.3(react@18.2.0)
       swagger-ui-react:
         specifier: ^4.19.1
         version: 4.19.1(@types/react@18.3.11)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
@@ -2610,6 +2613,11 @@ packages:
     resolution: {integrity: sha512-OqJ2/vL7lEeV5zTJyG7kmARppUjiB9h9udl4qHQjjgEos66z00Ia0OckwYfRxCSFrW8RJIBnsBwQsHZbVPspqg==}
     peerDependencies:
       react: '>= 0.14.0'
+
+  react-tagsinput@3.20.3:
+    resolution: {integrity: sha512-a+7nZ9gg0SwuoPPmh2AAB98OXYduwi6WgYWgWlPts3mq1ookXGphq9Fe/XLhQcdunkiqJO4WXjWXtHE9UlFyiw==}
+    peerDependencies:
+      react: ^18.0.0 || ^17.0.0 || ^16.0.0 || ^15.0.0
 
   react-transition-group@4.4.5:
     resolution: {integrity: sha512-pZcd1MCJoiKiBR2NRxeCRg13uCXbydPnmB4EOeRrY7480qNWO8IIgQG6zlDkm6uRMsURXPuKq0GWtiM59a5Q6g==}
@@ -6281,6 +6289,10 @@ snapshots:
       prismjs: 1.29.0
       react: 18.2.0
       refractor: 3.6.0
+
+  react-tagsinput@3.20.3(react@18.2.0):
+    dependencies:
+      react: 18.2.0
 
   react-transition-group@4.4.5(react-dom@18.2.0(react@18.2.0))(react@18.2.0):
     dependencies:
