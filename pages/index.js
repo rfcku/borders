@@ -9,9 +9,9 @@ export default function Home({ date, time, timeAgo, ports }) {
   const [filtered, setFiltered] = useState(ports || []);
 
   const [tags, setTags] = useState([]);
+  const [userCoordinates, setUserCoordinates] = useState({ lat: 0, lon: 0, msg: '' });
 
   const handleInput = (e) => {
-
     setTags(e)
     let found = [];
     if (e.length === 0) {
@@ -28,20 +28,6 @@ export default function Home({ date, time, timeAgo, ports }) {
       });
     });
     setFiltered(found);
-    //setFiltered(
-    //  ports.filter((port) => {
-    //
-    //    const name = port.port_name.toLowerCase();
-    //    const crossing = port.crossing_name.toLowerCase();
-    //    const number = port.port_number.toLowerCase();
-    //    const border = port.border.toLowerCase();
-    //
-    //    const search = str.toLowerCase();
-    //
-    //    return name.includes(search) || crossing.includes(search) || number.includes(search) || border.includes(search);
-    //
-    //  })
-    //);
   };
 
   var options = {
@@ -55,6 +41,7 @@ export default function Home({ date, time, timeAgo, ports }) {
     console.log(`Latitude : ${crd.latitude}`);
     console.log(`Longitude: ${crd.longitude}`);
     console.log(`More or less ${crd.accuracy} meters.`);
+    setUserCoordinates({ lat: crd.latitude, lon: crd.longitude, msg: `More or less ${crd.accuracy} meters.` });
   }
 
   function errors(err) {
@@ -101,7 +88,7 @@ export default function Home({ date, time, timeAgo, ports }) {
           <div className='flex'>
             <div className='grid xs:grid-cols-1 sm:grid-col-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2'>
               {filtered.map((port) => (
-                <Border key={port.port__name + port.port_number} {...port} />
+                <Border key={port.port__name + port.port_number} {...port} userCoordinates={userCoordinates} />
               ))}
             </div>
           </div>

@@ -6,6 +6,8 @@ import { AiFillCar } from 'react-icons/ai';
 import { FaWalking } from 'react-icons/fa';
 
 import { FaDirections } from 'react-icons/fa';
+import calculateDistance from '../../utils/distance';
+
 export default function Component(data) {
   const {
     port_number,
@@ -15,8 +17,10 @@ export default function Component(data) {
     port_status,
     passenger_vehicle_lanes,
     pedestrian_lanes,
+    userCoordinates,
   } = data;
 
+  console.log(data);
 
   const lanes = [
     {
@@ -33,23 +37,35 @@ export default function Component(data) {
     },
   ];
 
+  const { lat, lon } = userCoordinates;
+
+  const borderCoordinates = {
+    lat: 44.347318,
+    lon: -75.983396,
+  }
+
+
+  const distance = calculateDistance(userCoordinates.lat, userCoordinates.lon, borderCoordinates.lat, borderCoordinates.lon).toFixed(2);
 
   return (
     <div key={port_number} className='flex flex-col gap-3 align-middle justify-between items-stretch p-5 rounded-xl bg-zinc-800'>
       <div className='flex flex-col gap-2 w-full'>
         <div className='flex flex-row justify-between gap-4'>
-          <div className='flex'>
+          <div className='flex flex-col'>
             <h3 className='font-bold text-lg'>
               <span>{port_name && port_name !== '' && `${port_name}`}</span>
               <span className='ml-2 text-zinc-300'>
                 {crossing_name && crossing_name !== '' && `${crossing_name}`}
               </span>
             </h3>
+
           </div>
-          <div className='flex justify-center items-center align-middle'>
+          <div className='flex flex-col justify-center items-center align-middle'>
             <Link rel="noreferrer" href={`https://www.google.com.mx/maps/search/${port_name}+${crossing_name}+border`} target="_blank" aria-label='Like' className='bg-blue-600 flex justify-center items-center align-middle rounded-xl h-10 w-10'>
               <FaDirections size='20' />
             </Link>
+
+            <p style={{ fontSize: 10 }} className='text-zinc-600'>{distance}km</p>
           </div>
         </div>
         <div className='flex flex-row gap-2'>
