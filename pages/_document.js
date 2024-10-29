@@ -15,18 +15,16 @@ class MyDocument extends Document {
       <Html lang='en'>
         <Head></Head>
         <Script async src="https://www.googletagmanager.com/gtag/js?id=G-MBS50P2R6Y" />
-        <Script
-          id="google-analytics"
-          dangerouslySetInnerHTML={{
-            __html: `
-                    window.dataLayer = window.dataLayer || [];
-                    function gtag(){dataLayer.push(arguments);}
-                    gtag('js', new Date());
-                    gtag('config', 'G-MBS50P2R6Y');
-                  `,
-          }}
 
-        />
+        <Script id="google-analytics">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+  
+            gtag('config', 'G-MBS50P2R6Y');
+          `}
+        </Script>
 
         <body>
           <Main />
