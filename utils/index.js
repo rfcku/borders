@@ -1,5 +1,6 @@
 import xml2js from 'xml2js';
 import dayjs from 'dayjs';
+import { portCoordinates } from './coordinates';
 
 const duration = require('dayjs/plugin/duration');
 dayjs.extend(duration);
@@ -18,6 +19,13 @@ const clean_obj = (port) => {
     obj[k] =
       typeof port[k][0] === 'object' ? clean_obj(port[k][0]) : port[k][0];
   });
+  
+  // Inject coordinates if available
+  if (obj.port_number && portCoordinates[obj.port_number]) {
+    obj.lat = portCoordinates[obj.port_number].lat;
+    obj.lon = portCoordinates[obj.port_number].lon;
+  }
+  
   return obj;
 };
 export const cleanObj = clean_obj;

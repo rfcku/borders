@@ -1,71 +1,60 @@
 import Link from "next/link";
-
 import TagsInput from "react-tagsinput";
+import { MdOutlineWaves, MdSearch } from "react-icons/md";
+import { HiOutlineLocationMarker } from "react-icons/hi";
 
 export const Navbar = ({ handleInput, date, time, timeago, tags }) => {
   return (
-    <div className="sticky top-0 z-50 p-0 bg-zinc-950">
-      <div className="flex flex-row gap-2 px-20 py-4 justify-between align-middle items-center">
+    <div className="sticky top-0 z-50 bg-zinc-950/80 backdrop-blur-md border-b border-zinc-900">
+      <div className="flex flex-row px-6 md:px-20 py-4 justify-between items-center max-w-[1600px] mx-auto">
         <Link
           href="/"
-          className="flex flex-row gap-3 align-middle items-center"
+          className="flex flex-row gap-3 items-center group"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="currentColor"
-            className="size-14"
-          >
-            <path
-              fillRule="evenodd"
-              d="M9.315 7.584C12.195 3.883 16.695 1.5 21.75 1.5a.75.75 0 0 1 .75.75c0 5.056-2.383 9.555-6.084 12.436A6.75 6.75 0 0 1 9.75 22.5a.75.75 0 0 1-.75-.75v-4.131A15.838 15.838 0 0 1 6.382 15H2.25a.75.75 0 0 1-.75-.75 6.75 6.75 0 0 1 7.815-6.666ZM15 6.75a2.25 2.25 0 1 0 0 4.5 2.25 2.25 0 0 0 0-4.5Z"
-              clipRule="evenodd"
-            />
-            <path d="M5.26 17.242a.75.75 0 1 0-.897-1.203 5.243 5.243 0 0 0-2.05 5.022.75.75 0 0 0 .625.627 5.243 5.243 0 0 0 5.022-2.051.75.75 0 1 0-1.202-.897 3.744 3.744 0 0 1-3.008 1.51c0-1.23.592-2.323 1.51-3.008Z" />
-          </svg>
+          <div className="bg-blue-600 p-2 rounded-xl group-hover:bg-blue-500 transition-colors">
+            <MdOutlineWaves size={32} className="text-white" />
+          </div>
 
           <div className="flex flex-col">
-            <h1 className="font-extrabold text-2xl">GoBorderGo</h1>
-            <div className="text-xs dark:text-zinc-400 font-light">{date}</div>
+            <h1 className="font-black text-2xl tracking-tighter text-white">
+              BORDER<span className="text-blue-500">FLOW</span>
+            </h1>
+            <div className="text-[10px] uppercase tracking-widest text-zinc-500 font-bold leading-none">
+              Real-time Intelligence
+            </div>
           </div>
         </Link>
-        <div className="flex flex-row gap-3">
-          <div className="flex flex-col items-end">
-            <code className="text-sm font-light">
-              Updated: {date} {time}
-            </code>
-            <code className="text-sm font-light">{timeago}</code>
+
+        <div className="flex flex-row gap-6 items-center">
+          <div className="hidden lg:flex flex-row items-center gap-4 border-r border-zinc-800 pr-6">
+            <div className="flex flex-col items-end">
+              <span className="text-[10px] uppercase text-zinc-500 font-bold">Last Update</span>
+              <code className="text-xs text-blue-400 font-medium">
+                {time}
+              </code>
+            </div>
+            <div className="flex flex-col items-end">
+              <span className="text-[10px] uppercase text-zinc-500 font-bold">Status</span>
+              <code className="text-xs text-green-500 font-medium lowercase italic">{timeago}</code>
+            </div>
           </div>
 
-          <button className="text-zinc-500">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth="1.5"
-              stroke="currentColor"
-              className="size-6"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
-              />
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z"
-              />
-            </svg>
+          <div className="flex flex-row items-center bg-zinc-900 border border-zinc-800 rounded-2xl px-3 py-1 focus-within:border-blue-500/50 transition-all min-w-[300px]">
+            <MdSearch size={20} className="text-zinc-500" />
+            <TagsInput
+              value={tags}
+              onChange={handleInput}
+              className="react-tagsinput-custom"
+              inputProps={{
+                placeholder: "Search ports, cities...",
+                className: "bg-transparent border-0 outline-none text-sm text-zinc-300 ml-2 py-1 w-full",
+              }}
+            />
+          </div>
+
+          <button className="p-2 text-zinc-400 hover:text-white hover:bg-zinc-900 rounded-xl transition-all">
+            <HiOutlineLocationMarker size={24} />
           </button>
-          <TagsInput
-            value={tags}
-            onChange={handleInput}
-            className="flex flex-row gap-2 bg-zinc-900 px-2 py-1 rounded-md items-center align-middle min-w-[250px]"
-            inputProps={{
-              placeholder: "Search",
-            }}
-          />
         </div>
       </div>
     </div>

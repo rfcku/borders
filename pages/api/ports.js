@@ -1,6 +1,5 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import { getBorders, byCountry, cleanObj, arrangeBy } from '../../utils';
-import clientPromise from '../../lib/mongodb';
 
 /**
  * @swagger

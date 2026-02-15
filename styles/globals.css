@@ -31,43 +31,39 @@ a {
 
 .react-tagsinput {
   overflow: hidden;
-  border-radius: 0.5rem;
-  background-color: #111;
-}
-
-.react-tagsinput--focused {
-  border-color: #a5d24a;
+  background-color: transparent;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
 }
 
 .react-tagsinput-tag {
-  border-radius: 0.5rem;
-  border: 1px solid #777;
+  background-color: #27272a; /* zinc-800 */
+  color: #3b82f6; /* blue-500 */
+  border-radius: 6px;
+  border: 1px solid #3b82f644;
   display: inline-block;
   font-family: sans-serif;
-  font-size: 13px;
-  font-weight: 400;
-  margin-right: 5px;
-  padding: 7px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin: 2px;
+  padding: 4px 8px;
 }
 
 .react-tagsinput-remove {
   cursor: pointer;
   font-weight: bold;
-}
-
-.react-tagsinput-tag a::before {
-  content: " ×";
+  margin-left: 4px;
 }
 
 .react-tagsinput-input {
   background: transparent;
   border: 0;
+  color: #d4d4d8;
   font-family: sans-serif;
-  font-size: 13px;
-  font-weight: 400;
-  margin-bottom: 6px;
-  margin-top: 1px;
+  font-size: 14px;
   outline: none;
-  padding: 5px;
-  width: 80px;
+  padding: 8px;
+  width: 150px;
 }

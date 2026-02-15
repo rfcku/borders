@@ -86,6 +86,18 @@ export default port = {
             ...lane
         },
         required: true
+    },
+    lat: {
+        type: "number",
+        description: "Latitude",
+        example: 44.347318,
+        required: false
+    },
+    lon: {
+        type: "number",
+        description: "Longitude",
+        example: -75.983396,
+        required: false
     }
   }
   
